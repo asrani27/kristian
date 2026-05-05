@@ -1,0 +1,114 @@
+@extends('layouts.app')
+
+@section('title', 'Edit Camat')
+@section('header', 'Camat')
+@section('breadcrumb', 'Edit Data Camat')
+
+@section('content')
+    <div class="max-w-2xl">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <div class="flex items-center gap-3 mb-6">
+                <a href="{{ route('admin.camat.index') }}" class="p-2 rounded-lg hover:bg-gray-100 transition">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </a>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800">Edit Camat</h3>
+                    <p class="text-sm text-gray-500">Edit data camat</p>
+                </div>
+            </div>
+
+            <form action="{{ route('admin.camat.update', $camat->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                
+                <div class="space-y-5">
+                    <div>
+                        <label for="nip" class="block text-sm font-medium text-gray-700 mb-2">NIP</label>
+                        <input type="text" name="nip" id="nip" value="{{ old('nip', $camat->nip) }}" required
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition @error('nip') border-red-500 @enderror"
+                            placeholder="Contoh: 198501012010011001">
+                        @error('nip')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                        <input type="text" name="nama" id="nama" value="{{ old('nama', $camat->nama) }}" required
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition @error('nama') border-red-500 @enderror"
+                            placeholder="Masukkan nama lengkap">
+                        @error('nama')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="kecamatan_id" class="block text-sm font-medium text-gray-700 mb-2">Kecamatan</label>
+                        <select name="kecamatan_id" id="kecamatan_id" required
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition @error('kecamatan_id') border-red-500 @enderror">
+                            <option value="">-- Pilih Kecamatan --</option>
+                            @foreach($kecamatans as $kecamatan)
+                                <option value="{{ $kecamatan->id }}" {{ old('kecamatan_id', $camat->kecamatan_id) == $kecamatan->id ? 'selected' : '' }}>
+                                    {{ $kecamatan->nama }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('kecamatan_id')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                        <select name="status" id="status" required
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition @error('status') border-red-500 @enderror">
+                            <option value="aktif" {{ old('status', $camat->status) == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                            <option value="nonaktif" {{ old('status', $camat->status) == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                        </select>
+                        @error('status')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="tanggal_menjabat" class="block text-sm font-medium text-gray-700 mb-2">Tanggal Menjabat</label>
+                        <input type="date" name="tanggal_menjabat" id="tanggal_menjabat" value="{{ old('tanggal_menjabat', $camat->tanggal_menjabat) }}" required
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition @error('tanggal_menjabat') border-red-500 @enderror">
+                        @error('tanggal_menjabat')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="tanggal_demisioner" class="block text-sm font-medium text-gray-700 mb-2">Tanggal Demisioner</label>
+                        <input type="date" name="tanggal_demisioner" id="tanggal_demisioner" value="{{ old('tanggal_demisioner', $camat->tanggal_demisioner) }}"
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition @error('tanggal_demisioner') border-red-500 @enderror">
+                        <p class="mt-1 text-xs text-gray-500">Kosongkan jika masih menjabat</p>
+                        @error('tanggal_demisioner')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="alamat" class="block text-sm font-medium text-gray-700 mb-2">Alamat</label>
+                        <textarea name="alamat" id="alamat" rows="3"
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition @error('alamat') border-red-500 @enderror"
+                            placeholder="Masukkan alamat">{{ old('alamat', $camat->alamat) }}</textarea>
+                        @error('alamat')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 mt-8">
+                    <button type="submit" class="px-6 py-2.5 bg-primary text-white rounded-xl hover:bg-primary/90 transition font-medium shadow-lg shadow-primary/30">
+                        <i class="fas fa-save mr-2"></i>Simpan Perubahan
+                    </button>
+                    <a href="{{ route('admin.camat.index') }}" class="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition font-medium">
+                        Batal
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
