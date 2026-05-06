@@ -6,7 +6,10 @@
     <title>Laporan Surat</title>
 
     <style>
-        @page { size: landscape; }
+        @page {
+            size: landscape;
+        }
+
         body {
             font-family: "Times New Roman", serif;
             font-size: 14px;
@@ -110,13 +113,15 @@
 
         <div class="header">
 
-            <div class="logo-container">
-                <img src="{{ base_path('public/logo/kuala.png') }}" width="110px">
+            <div class="logo-container"><img
+                    src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('logo/kuala.png'))) }}"
+                    width="80">
             </div>
             <div class="header-content">
                 <h1>KECAMATAN MANDASTANA</h1>
                 <h2>KABUPATEN BARITO KUALA</h2>
-                <p>Jl. Desa Tabing Rimbah No 3 RT 7 Desa Tabing Rimbah Kecamatan Mandastana Kabupaten Barito Kuala Kalimantan Selatan 70571
+                <p>Jl. Desa Tabing Rimbah No 3 RT 7 Desa Tabing Rimbah Kecamatan Mandastana Kabupaten Barito Kuala
+                    Kalimantan Selatan 70571
                 </p>
             </div>
 
@@ -158,8 +163,8 @@
 
         <div class="ttd">
             <p>Tabing Rimbah, {{ now()->translatedFormat('d F Y') }}</p>
-            <p>Mengetahui,<br/>  
-            Camat Mandastana</p>
+            <p>Mengetahui,<br />
+                Camat Mandastana</p>
 
             <br><br><br>
 

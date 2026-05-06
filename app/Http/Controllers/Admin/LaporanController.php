@@ -142,7 +142,7 @@ class LaporanController extends Controller
             'isRemoteEnabled' => true,
         ]);
 
-        $filename = $request->periode 
+        $filename = $request->periode
             ? 'laporan_kegiatan_' . $request->periode . '_' . date('d-m-Y') . '.pdf'
             : 'laporan_kegiatan_semua_' . date('d-m-Y') . '.pdf';
 
