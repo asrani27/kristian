@@ -18,12 +18,7 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        $periodes = Kegiatan::selectRaw('YEAR(tanggal_mulai) as tahun')
-            ->groupBy('tahun')
-            ->orderBy('tahun', 'desc')
-            ->pluck('tahun');
-
-        return view('admin.laporan.index', compact('periodes'));
+        return view('admin.laporan.index');
     }
 
     /**
@@ -115,19 +110,36 @@ class LaporanController extends Controller
     }
 
     /**
-     * Generate PDF for Kegiatan report by period
+     * Generate PDF for Kegiatan report by date range
      */
     public function kegiatanPdf(Request $request)
     {
         $query = Kegiatan::with('desa.kecamatan');
 
-        // Filter by periode if selected
-        if ($request->has('periode') && $request->periode) {
-            $query->whereYear('tanggal_mulai', $request->periode);
+        // Filter by tanggal mulai and tanggal selesai if provided
+        if ($request->has('tanggal_mulai') && $request->tanggal_mulai) {
+            $query->whereDate('tanggal_mulai', '>=', $request->tanggal_mulai);
+        }
+
+        if ($request->has('tanggal_selesai') && $request->tanggal_selesai) {
+            $query->whereDate('tanggal_mulai', '<=', $request->tanggal_selesai);
         }
 
         $kegiatans = $query->orderBy('tanggal_mulai', 'desc')->get();
-        $periode = $request->periode ?? 'Semua Periode';
+
+        // Build periode label for display
+        $tanggalMulai = $request->tanggal_mulai ?? null;
+        $tanggalSelesai = $request->tanggal_selesai ?? null;
+
+        if ($tanggalMulai && $tanggalSelesai) {
+            $periode = \Carbon\Carbon::parse($tanggalMulai)->format('d/m/Y') . ' - ' . \Carbon\Carbon::parse($tanggalSelesai)->format('d/m/Y');
+        } elseif ($tanggalMulai) {
+            $periode = 'Dari ' . \Carbon\Carbon::parse($tanggalMulai)->format('d/m/Y');
+        } elseif ($tanggalSelesai) {
+            $periode = 'Sampai ' . \Carbon\Carbon::parse($tanggalSelesai)->format('d/m/Y');
+        } else {
+            $periode = 'Semua Periode';
+        }
 
         $pdf = Pdf::loadView('admin.laporan.pdf.kegiatan', [
             'kegiatans' => $kegiatans,
@@ -142,9 +154,7 @@ class LaporanController extends Controller
             'isRemoteEnabled' => true,
         ]);
 
-        $filename = $request->periode
-            ? 'laporan_kegiatan_' . $request->periode . '_' . date('d-m-Y') . '.pdf'
-            : 'laporan_kegiatan_semua_' . date('d-m-Y') . '.pdf';
+        $filename = 'laporan_kegiatan_' . date('d-m-Y') . '.pdf';
 
         return $pdf->stream($filename);
     }

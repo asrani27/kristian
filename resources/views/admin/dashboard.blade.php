@@ -33,7 +33,7 @@
     <!-- Total Desa -->
     <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-4 lg:p-6">
         <div class="flex items-center gap-4">
-            <div class="w-12 h-12 lg:w-14 lg:h-14 gradient-bg-1 rounded-xl flex items-center justify-center shadow-lg">
+            <div class="w-12 h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-sky-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
                 <i class="fas fa-home text-white text-lg lg:text-xl"></i>
             </div>
             <div>
@@ -46,7 +46,7 @@
     <!-- Total Kecamatan -->
     <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-4 lg:p-6">
         <div class="flex items-center gap-4">
-            <div class="w-12 h-12 lg:w-14 lg:h-14 gradient-bg-2 rounded-xl flex items-center justify-center shadow-lg">
+            <div class="w-12 h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
                 <i class="fas fa-map-marked-alt text-white text-lg lg:text-xl"></i>
             </div>
             <div>
@@ -59,7 +59,7 @@
     <!-- Total Kepala Desa -->
     <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-4 lg:p-6">
         <div class="flex items-center gap-4">
-            <div class="w-12 h-12 lg:w-14 lg:h-14 gradient-bg-3 rounded-xl flex items-center justify-center shadow-lg">
+            <div class="w-12 h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
                 <i class="fas fa-user-tie text-white text-lg lg:text-xl"></i>
             </div>
             <div>
@@ -72,7 +72,7 @@
     <!-- Total Kegiatan -->
     <div class="stat-card bg-white rounded-2xl shadow-sm border border-gray-100 p-4 lg:p-6">
         <div class="flex items-center gap-4">
-            <div class="w-12 h-12 lg:w-14 lg:h-14 gradient-bg-4 rounded-xl flex items-center justify-center shadow-lg">
+            <div class="w-12 h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
                 <i class="fas fa-clipboard-list text-white text-lg lg:text-xl"></i>
             </div>
             <div>

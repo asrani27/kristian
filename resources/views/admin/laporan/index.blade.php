@@ -92,15 +92,12 @@
                 
                 <form action="{{ route('admin.laporan.kegiatan.pdf') }}" target="_blank" method="GET" class="flex flex-wrap items-end gap-3">
                     <div class="flex-1 min-w-[200px]">
-                        <label class="block text-sm font-medium text-gray-600 mb-1">Pilih Periode</label>
-                        <select name="periode" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition">
-                            <option value="">Semua Periode</option>
-                            @forelse($periodes as $tahun)
-                                <option value="{{ $tahun }}">{{ $tahun }}</option>
-                            @empty
-                                <option value="" disabled>Tidak ada data</option>
-                            @endforelse
-                        </select>
+                        <label class="block text-sm font-medium text-gray-600 mb-1">Tanggal Mulai</label>
+                        <input type="date" name="tanggal_mulai" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition">
+                    </div>
+                    <div class="flex-1 min-w-[200px]">
+                        <label class="block text-sm font-medium text-gray-600 mb-1">Tanggal Selesai</label>
+                        <input type="date" name="tanggal_selesai" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition">
                     </div>
                     <button type="submit" 
                             class="inline-flex items-center gap-2 px-5 py-2.5 bg-purple-500 text-white rounded-xl hover:bg-purple-600 transition font-medium text-sm shadow-lg shadow-purple-500/30">
