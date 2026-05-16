@@ -17,7 +17,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $desa = $user->usable;
-        
+
         // Stats for kepala desa
         $stats = [
             'total_kegiatan' => $desa ? $desa->kegiatans->count() : 0,
@@ -25,15 +25,15 @@ class DashboardController extends Controller
             'kegiatan_selesai' => $desa ? $desa->kegiatans()->where('status', 'completed')->count() : 0,
             'kegiatan_berlangsung' => $desa ? $desa->kegiatans()->where('status', 'ongoing')->count() : 0,
         ];
-        
+
         // Recent activities
-        $recentActivities = $desa 
+        $recentActivities = $desa
             ? $desa->kegiatans()
-                ->orderBy('tanggal_mulai', 'desc')
-                ->limit(5)
-                ->get()
+            ->orderBy('tanggal_mulai', 'desc')
+            ->limit(5)
+            ->get()
             : collect();
-        
+
         return view('desa.dashboard', compact('stats', 'recentActivities', 'desa'));
     }
 }
