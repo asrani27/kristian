@@ -154,7 +154,6 @@
                     <th style="width: 12%">Kecamatan</th>
                     <th style="width: 10%">Tanggal Mulai</th>
                     <th style="width: 10%">Tanggal Selesai</th>
-                    <th style="width: 26%">Deskripsi</th>
                 </tr>
             </thead>
 
@@ -168,7 +167,10 @@
                     <td>{{ $kegiatan->desa->kecamatan->nama ?? '-' }}</td>
                     <td>{{ $kegiatan->tanggal_mulai ? $kegiatan->tanggal_mulai->format('d/m/Y') : '-' }}</td>
                     <td>{{ $kegiatan->tanggal_selesai ? $kegiatan->tanggal_selesai->format('d/m/Y') : '-' }}</td>
-                    <td>{{ $kegiatan->deskripsi ?? '-' }}</td>
+
+                </tr>
+                <tr>
+                    <td colspan="7"><b>Deskripsi :</b> {{ $kegiatan->deskripsi ?? '-' }}</td>
                 </tr>
                 @empty
                 <tr>
